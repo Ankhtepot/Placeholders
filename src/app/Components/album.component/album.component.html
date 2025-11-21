@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <p>{{comment}}</p>
+  <div class="image_wrapper" id="flashbacks">
+    <img [alt]="name" [src]="imagePath"/>
+    @if (hasAdditionalFunctions()) {
+      <div class="additional-functions__wrapper">
+        @if (hasPlaylist()) {
+          <div>
+            <p>PLAYLIST</p>
+          </div>
+        }
+        @if (hasImages()) {
+          <div>
+            <p>IMAGES</p>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

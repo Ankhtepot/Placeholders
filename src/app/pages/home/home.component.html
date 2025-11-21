@@ -1,0 +1,39 @@
+<div class="wrap">
+
+  <div class="main_container_wrapper">
+    <div class="logo">
+      <img alt="Sleeping Deficit" ngSrc="images/sleeping-deficit-bg.png" height="200" width="200" priority/>
+    </div>
+    <app-album name="Flashback" imagePath="images/FlashbacksCover.png" comment="New Album:" [images]="pathImages" [playList]="pathPlaylist"/>
+    <app-album name="Flashback" imagePath="images/FlashbacksCover.png" comment="First Album:"/>
+  </div>
+
+  <div id="menu">
+    <a href="https://www.facebook.com/sleepingdeficit/" class="menu_item" title="Facebook.com">
+      <!--      <i class="fa-facebook fa-4x"></i>-->
+      <fa-icon [icon]="faFacebook" size="3x"></fa-icon>
+    </a>
+    <a href="https://open.spotify.com/album/2Yz8WGXDJrYioGOxAtd5Eg" class="menu_item" id="menuSpotify"
+       title="Spotify.com">
+      <!--      <i class="fab fa-spotify fa-4x"></i>-->
+      <fa-icon [icon]="faSpotify" size="3x"></fa-icon>
+    </a>
+    <a href="https://sleepingdeficit.bandcamp.com/" class="menu_item" id="menu2" title="BandCamp.com">
+      <!--      <i class="fab fa-bandcamp fa-4x"></i>-->
+      <img src="images/menu2-bc.png" alt="BandCamp.com">
+    </a>
+    <a href="https://www.youtube.com/channel/UCsI6gLnPiCSNyXWOuQ3v0TA/videos" class="menu_item" id="menu3"
+       title="YouTube.com">
+      <!--      <i class="fab fa-youtube-square fa-4x"></i>-->
+      <fa-icon [icon]="faYoutube" size="3x"></fa-icon>
+    </a>
+    <!--    <a href="https://bandzone.cz/sleepingdeficit" class="menu_item menu_image" title="Bandzone.cz">-->
+    <a href="https://bandzone.cz/sleepingdeficit" class="menu_item" title="Bandzone.cz">
+      <img src="images/menu4-bz.png" alt="Bandzone.cz">
+    </a>
+    <a href="https://soundcloud.com/sleepingdeficit" class="menu_item" id="menu5" title="SoundCloud.com">
+      <img src="images/menu5-sc.png" alt="SoundCloud.com">
+    </a>
+  </div>
+
+</div>
