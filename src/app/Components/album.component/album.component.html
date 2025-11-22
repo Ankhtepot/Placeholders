@@ -1,19 +1,34 @@
 <div class="wrapper">
-  <p>{{comment}}</p>
-  <div class="image_wrapper" id="flashbacks">
-    <img [alt]="name" [src]="imagePath"/>
+  <p>{{ comment }}</p>
+  <div class="image_wrapper" [class.hasAdditionalFunctions]="hasAdditionalFunctions()">
+      <img [alt]="name" [src]="imagePath"/>
     @if (hasAdditionalFunctions()) {
-      <div class="additional-functions__wrapper">
-        @if (hasPlaylist()) {
+      <div
+        class="additional-functions__wrapper"
+        (mouseenter)="setAdditionFunctionsHover(true)"
+        (mouseleave)="setAdditionFunctionsHover(false)"
+      >
+        <div class="additional-functions__buttons" [class.buttonsOnHover]="isAdditionFunctionsHover()">
+          @if (hasPlaylist()) {
+            <div>
+              <app-icon-button [onclick]="onPlaylistClick">
+                <img src="images/icons/gallery2_128.png" alt="Gallery">
+              </app-icon-button>
+            </div>
+          }
+          @if (hasImages()) {
+            <div>
+              <app-icon-button [onclick]="onImagesClick">
+                <img src="images/icons/playlist2_128.png" alt="Playlist">
+              </app-icon-button>
+            </div>
+          }
           <div>
-            <p>PLAYLIST</p>
+            <app-icon-button [onclick]="onImagesClick">
+              <img src="images/icons/buy2_128.png" alt="Buy Album">
+            </app-icon-button>
           </div>
-        }
-        @if (hasImages()) {
-          <div>
-            <p>IMAGES</p>
-          </div>
-        }
+        </div>
       </div>
     }
   </div>

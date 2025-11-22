@@ -1,0 +1,19 @@
+<div class="swiper" [style.background-image]="'url(' + fillImageUrl + ')'">
+  <div class="swiper-wrapper">
+    @for (image of images; track image) {
+      <div
+        class="swiper-slide"
+        [ngStyle]="{'height': maxHeight, 'display': 'flex', 'justify-content': 'center', 'align-items': 'center'}"
+      >
+        <app-image-slide
+          [image]="image"
+          class="swiper-slide"
+        ></app-image-slide>
+      </div>
+    }
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev swiper-button-color"></div>
+  <div class="swiper-button-next swiper-button-color"></div>
+  <div class="swiper-scrollbar"></div>
+</div>

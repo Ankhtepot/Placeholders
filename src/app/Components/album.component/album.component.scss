@@ -13,12 +13,57 @@
     letter-spacing: 1px;
   }
 
-  .additional-functions__wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .image_wrapper {
+    position: relative;
 
-    display: flex;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .additional-functions__wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: transparent;
+      z-index: 2;
+      transition: .5s all;
+
+      $shadow-color-value: 187;
+      $shadow-color: rgba($shadow-color-value, $shadow-color-value, $shadow-color-value, 0.5);
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .6);
+        //box-shadow: 0 0 91px 33px rgba(0,0,0,0.75) inset;
+        //-webkit-box-shadow: 0 0 91px 33px rgba(0,0,0,0.75) inset;
+        //-moz-box-shadow: 0 0 91px 33px rgba(0,0,0,0.75) inset;
+        box-shadow: 0 0 91px 33px $shadow-color inset;
+        -webkit-box-shadow: 0 0 91px 33px $shadow-color inset;
+        -moz-box-shadow: 0 0 91px 33px $shadow-color inset;
+      }
+    }
+
+    .additional-functions__buttons {
+      opacity: 0;
+      //max-width: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1em;
+
+      transition: .5s all;
+
+      &.buttonsOnHover {
+        opacity: 1;
+      }
+    }
   }
 }
