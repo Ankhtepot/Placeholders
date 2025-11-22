@@ -79,7 +79,9 @@ a img {
 }
 
 #menu a {
-  height: 4em;
+  $size: 3.5em;
+  height: $size;
+  width: $size;
 }
 
 .menu_item {
