@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {AlbumComponent} from '../../Components/album.component/album.component';
+import {AlbumComponent, EModalContent} from '../../Components/album.component/album.component';
 import {
   faFacebookSquare,
   faSpotify,
@@ -22,4 +22,5 @@ export class HomeComponent {
 
   pathImages = ["blabla", "bleble"];
   pathPlaylist = ["playlist", "playlist"];
+  protected readonly EModalContent = EModalContent;
 }

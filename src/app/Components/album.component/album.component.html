@@ -11,20 +11,20 @@
         <div class="additional-functions__buttons" [class.buttonsOnHover]="isAdditionFunctionsHover()">
           @if (hasPlaylist()) {
             <div>
-              <app-icon-button [onclick]="onPlaylistClick">
+              <app-icon-button (click)="onAlbumButtonClick(EModalContent.gallery, playList)">
                 <img src="images/icons/gallery2_128.png" alt="Gallery">
               </app-icon-button>
             </div>
           }
           @if (hasImages()) {
             <div>
-              <app-icon-button [onclick]="onImagesClick">
+              <app-icon-button (click)="onAlbumButtonClick(EModalContent.playlist, images)">
                 <img src="images/icons/playlist2_128.png" alt="Playlist">
               </app-icon-button>
             </div>
           }
           <div>
-            <app-icon-button [onclick]="onImagesClick">
+            <app-icon-button (click)="onAlbumButtonClick(EModalContent.buy)">
               <img src="images/icons/buy2_128.png" alt="Buy Album">
             </app-icon-button>
           </div>
@@ -33,3 +33,13 @@
     }
   </div>
 </div>
+
+@if (showModalContentType() !== EModalContent.none) {
+  <app-modal
+    (close)="onAlbumButtonClick(EModalContent.none)"
+    [isCloseButtonShown]="true"
+  >
+
+  </app-modal>
+}
+

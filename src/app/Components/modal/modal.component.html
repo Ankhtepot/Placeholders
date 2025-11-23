@@ -1,0 +1,21 @@
+<div class="modal-backdrop" [class.opening]="isOpening()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+
+    <!-- scrollable content -->
+    <div class="modal-content-scroll">
+      <ng-content></ng-content>
+    </div>
+
+    <!-- close button -->
+    @if (isCloseButtonShown) {
+      <div class="close-button-wrapper">
+        <app-generic-button
+          [label]="closeText"
+          (click)="close.emit()"
+          [width]="closeButtonStyle.width"
+          [margin]="closeButtonStyle.margin"
+        />
+      </div>
+    }
+  </div>
+</div>

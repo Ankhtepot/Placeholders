@@ -1,10 +1,18 @@
 import {Component, Input, OnInit, signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {IconButtonComponent} from '../icon-button.component/icon-button.component';
+import {ModalComponent} from '../modal/modal.component';
+
+export enum EModalContent {
+  none = 'none',
+  playlist = 'playlist',
+  gallery = 'gallery',
+  buy = 'buy',
+}
 
 @Component({
   selector: 'app-album',
-  imports: [CommonModule, IconButtonComponent],
+  imports: [CommonModule, IconButtonComponent, ModalComponent],
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.scss'],
   standalone: true
@@ -16,10 +24,13 @@ export class AlbumComponent implements OnInit {
   @Input() playList?: string[];
   @Input() images?: string[];
 
+  public modalContent: string[] = [];
+
   readonly hasPlaylist = signal(false);
   readonly hasImages = signal(false);
   readonly hasAdditionalFunctions = signal(false);
   readonly isAdditionFunctionsHover = signal(false);
+  readonly showModalContentType = signal(EModalContent.none);
 
   ngOnInit(): void {
       this.hasPlaylist.set(this.playList != undefined && this.playList.length > 0);
@@ -31,11 +42,13 @@ export class AlbumComponent implements OnInit {
       this.isAdditionFunctionsHover.set(isHover);
   }
 
-  onPlaylistClick() {
-    console.log('Playlist clicked');
+  public onAlbumButtonClick(contentType: EModalContent, payload?: string[]): void {
+    this.showModalContentType.set(contentType);
+
+    if (contentType === EModalContent.none) {return;}
+
+    this.modalContent = payload || [];
   }
 
-  onImagesClick() {
-    console.log('Images clicked');
-  }
+  protected readonly EModalContent = EModalContent;
 }
