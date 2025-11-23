@@ -20,7 +20,10 @@ export class HomeComponent {
   faSpotify = faSpotify;
   faYoutube = faYoutubeSquare;
 
-  pathImages = ["blabla", "bleble"];
+  pathImages = [
+    "images/path-images/2.jpg", "images/path-images/3.jpg", "images/path-images/4.jpg", "images/path-images/5.jpg",
+    "images/path-images/6.jpg", "images/path-images/8.jpg", "images/path-images/9.jpg", "images/path-images/10.jpg"
+  ];
   pathPlaylist = ["playlist", "playlist"];
   protected readonly EModalContent = EModalContent;
 }

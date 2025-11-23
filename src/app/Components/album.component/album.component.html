@@ -39,7 +39,9 @@
     (close)="onAlbumButtonClick(EModalContent.none)"
     [isCloseButtonShown]="true"
   >
-
+    @if (showModalContentType() === EModalContent.gallery && images && images.length > 0) {
+      <app-modal-content-gallery [imagesPaths]="images"/>
+    }
   </app-modal>
 }
 

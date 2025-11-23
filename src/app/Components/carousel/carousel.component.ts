@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import Swiper from "swiper";
 import {Autoplay, Navigation, Pagination} from 'swiper/modules';
 import {ScreenService} from "../../services/screen.service";
@@ -38,11 +38,12 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() images: string[] = [];
   resizeSubscription?: Subscription;
 
+  screenService = inject(ScreenService);
+
   swiper?: Swiper;
-  fillImageUrl: string = 'assets/images/seamless-cosmic-background.jpg';
+  fillImageUrl: string = 'images/seamless-cosmic-background.jpg';
 
   constructor(
-    private screenService: ScreenService,
     private elementRef: ElementRef,
   ) {
   }
@@ -74,8 +75,10 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   private setSwiper() {
     this.images = this.getImages();
     this.swiper = new Swiper('.swiper', {
-      slidesPerView: resolveSlidesCount(this.screenService.mediaBreakpoint$.value),
-      slidesPerGroup: resolveSlidesPerCount(this.screenService.mediaBreakpoint$.value),
+      // slidesPerView: resolveSlidesCount(this.screenService.mediaBreakpoint$.value),
+      // slidesPerGroup: resolveSlidesPerCount(this.screenService.mediaBreakpoint$.value),
+      slidesPerView: 4,
+      slidesPerGroup: 1,
       centeredSlides: true,
       spaceBetween: 0,
       loop: true,
@@ -102,8 +105,7 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getImages(): any[] {
-    //TODO: images will be provided as Input property array
-    return [];
+    return this.images;
   }
 
   private setSlideStyles() {
