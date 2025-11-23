@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {IconButtonComponent} from '../icon-button/icon-button.component';
 import {ModalComponent} from '../modal/modal.component';
 import {ModalContentGalleryComponent} from '../modal-content-gallery/modal-content-gallery.component';
@@ -13,7 +12,7 @@ export enum EModalContent {
 
 @Component({
   selector: 'app-album',
-  imports: [CommonModule, IconButtonComponent, ModalComponent, ModalContentGalleryComponent],
+  imports: [IconButtonComponent, ModalComponent, ModalContentGalleryComponent],
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.scss'],
   standalone: true

@@ -1,11 +1,10 @@
 import {AfterViewInit, Component, EventEmitter, HostListener, Input, Output, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {GenericButtonComponent} from '../button-general/button-generic.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, GenericButtonComponent],
+  imports: [GenericButtonComponent],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })

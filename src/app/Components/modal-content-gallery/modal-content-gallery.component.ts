@@ -1,12 +1,11 @@
 import {Component, Input, OnInit, signal} from '@angular/core';
-import {CommonModule} from '@angular/common';
 // import {CarouselComponent} from '../carousel/carousel.component';
 // import {ImageSlideComponent} from '../carousel/image-slide/image-slide.component';
 
 @Component({
   selector: 'app-modal-content-gallery',
   // imports: [CommonModule, CarouselComponent, ImageSlideComponent],
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './modal-content-gallery.component.html',
   styleUrls: ['./modal-content-gallery.component.scss'],
   standalone: true

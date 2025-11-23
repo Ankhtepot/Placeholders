@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AlbumComponent, EModalContent} from '../../Components/album.component/album.component';
 import {
@@ -10,7 +10,7 @@ import {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FontAwesomeModule, NgOptimizedImage, AlbumComponent],
+  imports: [FontAwesomeModule, NgOptimizedImage, AlbumComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
