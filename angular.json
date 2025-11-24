@@ -82,7 +82,6 @@
               }
             ],
             "styles": [
-              "node_modules/@fontawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss"
             ]
           }

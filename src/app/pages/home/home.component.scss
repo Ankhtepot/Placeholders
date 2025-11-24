@@ -50,9 +50,6 @@ a img {
 
 .image_wrapper {
   max-height: 400px;
-  //position: absolute;
-  //top: 10%;
-  //left: 10%;
 }
 
 .logo {
@@ -60,17 +57,6 @@ a img {
   top: 10%;
   left: 10%;
 }
-
-//.big_image {
-//
-//  object-fit: cover;
-//  //min-height: 200px;
-//  //min-width: 200px;
-//  max-height: 400px;
-//  max-width: 400px;
-//  background-position: center;
-//  background-repeat: no-repeat;
-//}
 
 #menu {
   text-align: center;
@@ -93,7 +79,8 @@ a img {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, margin 0.2s;
+  //transition: border-color 0.2s, margin 0.2s;
+  transition: border-color 0.2s;
 
   img {
     width: inherit;
@@ -101,7 +88,8 @@ a img {
     background: center center no-repeat;
     border: 2px solid #000;
     object-fit: contain;
-    transition: border-color 0.5s, margin .5s;
+    //transition: border-color 0.5s, margin .5s;
+    transition: border-color 0.5s;
   }
 }
 
@@ -113,8 +101,8 @@ a img {
 {
   border-color: #fff;
   transition: border-color 0.5s, margin .5s;
-  margin-left: .2em;
-  margin-right: .2em;
+  //margin-left: .2em;
+  //margin-right: .2em;
 }
 
 /******************************************************************************/

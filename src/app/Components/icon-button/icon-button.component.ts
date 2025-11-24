@@ -18,6 +18,8 @@ export class IconButtonComponent {
   @Input() width: string = "5em";
   @Input() height: string = "5em";
   @Input() text: string = "";
+  @Input() disabled: boolean = false;
+  @Input() showBorder: boolean = true;
 
   // Input for passing a click handler function
   @Input() onclick: () => void = () => {};

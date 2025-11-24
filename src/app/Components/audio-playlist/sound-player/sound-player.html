@@ -1,0 +1,24 @@
+<div class="player">
+  <div class="song-name">{{ track.title }}</div>
+  <audio #audio (timeupdate)="updateProgress()" (ended)="onEnded()">
+    <source [src]="track.trackUrl" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  <div class="buttons">
+    <app-icon-button
+      (click)="togglePlay()"
+      [showBorder]="false"
+      [width]="'2em'"
+      [height]="'2em'"
+    >
+      @if (isPlaying()) {
+        <img src="images/icons/pause.png" alt="pause" >
+      } @else {
+        <img src="images/icons/play.png" alt="play">
+      }
+    </app-icon-button>
+  </div>
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="progress()"></div>
+  </div>
+</div>

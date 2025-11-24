@@ -9,16 +9,16 @@
         (mouseleave)="setAdditionFunctionsHover(false)"
       >
         <div class="additional-functions__buttons" [class.buttonsOnHover]="isAdditionFunctionsHover()">
-          @if (hasPlaylist()) {
+          @if (hasImages()) {
             <div>
-              <app-icon-button (click)="onAlbumButtonClick(EModalContent.gallery, playList)">
+              <app-icon-button (click)="onAlbumButtonClick(EModalContent.gallery, images)">
                 <img src="images/icons/gallery2_128.png" alt="Gallery">
               </app-icon-button>
             </div>
           }
-          @if (hasImages()) {
+          @if (hasPlaylist()) {
             <div>
-              <app-icon-button (click)="onAlbumButtonClick(EModalContent.playlist, images)">
+              <app-icon-button (click)="onAlbumButtonClick(EModalContent.playlist, playList)">
                 <img src="images/icons/playlist2_128.png" alt="Playlist">
               </app-icon-button>
             </div>
@@ -40,7 +40,10 @@
     [isCloseButtonShown]="true"
   >
     @if (showModalContentType() === EModalContent.gallery && images && images.length > 0) {
-      <app-modal-content-gallery [imagesPaths]="images"/>
+      <app-modal-content-gallery [imagesPaths]="images" [galleryName]="name" />
+    }
+    @if (showModalContentType() === EModalContent.playlist && playList?.tracks && playList!.tracks.length > 0) {
+      <app-modal-content-playlist [playlist]="playList || NULL_PLAYLIST" [title]="'Flashback'" />
     }
   </app-modal>
 }

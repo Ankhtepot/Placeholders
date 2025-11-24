@@ -10,6 +10,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
     "@angular/core": "^21.0.0",
@@ -17,13 +19,8 @@
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
     "@emailjs/browser": "^4.4.1",
-    "@fortawesome/angular-fontawesome": "^3.0.0",
-    "@fortawesome/fontawesome-free": "^7.1.0",
-    "@fortawesome/free-brands-svg-icons": "^7.1.0",
-    "@fortawesome/free-regular-svg-icons": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "ng-gallery": "^12.0.0-beta.4",
     "rxjs": "~7.8.0",
-    "swiper": "^12.0.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
