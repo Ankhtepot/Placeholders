@@ -1,9 +1,4 @@
 <div class="player">
-  <div class="song-name">{{ track.title }}</div>
-  <audio #audio (timeupdate)="updateProgress()" (ended)="onEnded()">
-    <source [src]="track.trackUrl" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
   <div class="buttons">
     <app-icon-button
       (click)="togglePlay()"
@@ -18,6 +13,7 @@
       }
     </app-icon-button>
   </div>
+  <div class="song-name">{{ track.title }}</div>
   <div class="progress-bar">
     <div class="progress" [style.width.%]="progress()"></div>
   </div>

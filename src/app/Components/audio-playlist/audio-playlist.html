@@ -1,32 +1,67 @@
-<div class="title">{{playlist.title}}</div>
-<div class="player">
-  <div class="song-name">{{ currentTrack() ? currentTrack().title : NULL_TRACK.title }}</div>
-  <audio #audio
-         (timeupdate)="updateProgress()"
-         (ended)="onEnded()"
-  >
-    @if (currentTrack()) {
-      <source [src]="currentTrack().trackUrl" type="audio/mpeg" />
-    }
-    Your browser does not support the audio element.
-  </audio>
-  <div class="buttons">
-    <app-icon-button
-      (click)="togglePlay()"
-      [showBorder]="false"
-      [width]="'2em'"
-      [height]="'2em'"
-    >
-      @if(!currentTrack().isInvalid) {
-        @if (isPlaying()) {
-          <img src="images/icons/pause.png" alt="pause">
-        } @else {
-          <img src="images/icons/play.png" alt="play">
+<div class="wrapper">
+  <div class="title">{{ playlist.title }}</div>
+  <div class="player">
+    <div class="play_component">
+      <div class="song-name">{{ currentTrack() ? currentTrack().title : NULL_TRACK.title }}</div>
+      <audio #audio
+             (timeupdate)="updateProgress()"
+             (ended)="onEnded()"
+             [src]="currentTrack().trackUrl"
+                     controls
+                     (play)="onPlay()"
+                     (pause)="onPause()"
+      >
+<!--        @if (currentTrack()) {-->
+<!--          <source [src]="currentTrack().trackUrl" type="audio/mpeg"/>-->
+<!--        }-->
+        Your browser does not support the audio element.
+      </audio>
+      <div class="buttons">
+
+<!--        &lt;!&ndash; PLAY BUTTON &ndash;&gt;-->
+
+<!--                <app-icon-button-->
+<!--                  (click)="togglePlay()"-->
+<!--                  [showBorder]="false"-->
+<!--                  [width]="'2em'"-->
+<!--                  [height]="'2em'"-->
+<!--                  [disabled]="currentTrack().isInvalid || false"-->
+<!--                >-->
+<!--                  @if (isPlaying()) {-->
+<!--                    <img src="images/icons/pause.png" alt="pause">-->
+<!--                  } @else {-->
+<!--                    <img src="images/icons/play.png" alt="play">-->
+<!--                  }-->
+<!--                </app-icon-button>-->
+
+<!--        &lt;!&ndash; STOP BUTTON &ndash;&gt;-->
+
+<!--                <app-icon-button-->
+<!--                  (click)="onEnded()"-->
+<!--                  [showBorder]="false"-->
+<!--                  [width]="'2em'"-->
+<!--                  [height]="'2em'"-->
+<!--                  [disabled]="!isPlaying()"-->
+<!--                >-->
+<!--                  <img src="images/icons/stop.png" alt="stop">-->
+<!--                </app-icon-button>-->
+      </div>
+<!--      <div class="progress-bar">-->
+<!--        <div class="progress" [style.width.%]="progress()"></div>-->
+<!--      </div>-->
+    </div>
+
+    <div class=tracks-wrapper>
+      @if (hasTracks()) {
+        @for (track of playlist.tracks; track track.title; let idx = $index) {
+          <app-sound-player
+            #soundPlayer
+            [track]="track"
+            [index]="idx"
+            (trackEvent)="onTrackEvent($event)"
+          ></app-sound-player>
         }
       }
-    </app-icon-button>
-  </div>
-  <div class="progress-bar">
-    <div class="progress" [style.width.%]="progress()"></div>
+    </div>
   </div>
 </div>

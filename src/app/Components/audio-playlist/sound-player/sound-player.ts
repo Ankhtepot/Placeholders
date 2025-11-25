@@ -1,6 +1,6 @@
-import {Component, ElementRef, ViewChild, signal, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output, signal,} from '@angular/core';
 import {IconButtonComponent} from '../../icon-button/icon-button.component';
-import {Track} from '../models';
+import {ETrackEventType, Track, TrackEventData} from '../models';
 
 @Component({
   selector: 'app-sound-player',
@@ -12,30 +12,55 @@ import {Track} from '../models';
   ]
 })
 export class SoundPlayer {
-  @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
   @Input() track!: Track;
+  @Input() index!: number;
+  @Output() trackEvent: EventEmitter<TrackEventData> = new EventEmitter(false);
 
   isPlaying = signal(false);
   progress = signal(0);
 
-  togglePlay() {
-    const audio = this.audioRef.nativeElement;
-    if (audio.paused) {
-      audio.play();
-      this.isPlaying.set(true);
-    } else {
-      audio.pause();
-      this.isPlaying.set(false);
+  private shouldUpdateProgress: boolean = false;
+
+  public stop(emitEvent: boolean = true, forceUpdateProgress = false) {
+    this.isPlaying.set(false);
+    this.updateProgress(0, forceUpdateProgress);
+    this.shouldUpdateProgress = false;
+    if (emitEvent) {
+      this.emitTrackEvent(ETrackEventType.stop);
     }
   }
 
-  updateProgress() {
-    const audio = this.audioRef.nativeElement;
-    this.progress.set((audio.currentTime / audio.duration) * 100);
+  public play(emitEvent: boolean = true) {
+    this.isPlaying = signal(true);
+    this.shouldUpdateProgress = true;
+    if (emitEvent) {
+      this.emitTrackEvent(ETrackEventType.play);
+    }
   }
 
-  onEnded() {
+  pause(emitEvent: boolean = true) {
     this.isPlaying.set(false);
-    this.progress.set(0);
+    if (emitEvent) {
+      this.emitTrackEvent(ETrackEventType.pause);
+    }
+  }
+
+  togglePlay() {
+    this.isPlaying()
+      ? this.emitTrackEvent(ETrackEventType.pause)
+      : this.emitTrackEvent(ETrackEventType.play);
+  }
+
+  updateProgress(progress: number, forceUpdate: boolean = false) {
+    if(this.shouldUpdateProgress || forceUpdate) {
+      this.progress.set(progress);
+    }
+  }
+
+  private emitTrackEvent(eventType: ETrackEventType) {
+    this.trackEvent.emit({
+      index: this.index,
+      event: eventType
+    });
   }
 }

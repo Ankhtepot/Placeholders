@@ -1,3 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
 .title {
   font-size: 2rem;
   font-weight: bold;
@@ -5,40 +13,76 @@
 }
 
 .player {
-  width: 300px;
+  width: 60%;
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  .buttons {
+  .play_component {
+    width: 100%;
+    background-color: #3f51b5;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: .5em;
+
+    audio {
+      margin-bottom: 1em;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1em;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      button {
+        margin-bottom: 8px;
+      }
+    }
+
+    .song-name {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .progress-bar {
+      width: 80%;
+      height: 10px;
+      background: #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: .5em;
+    }
+    .progress {
+      height: 100%;
+      background: white;
+      width: 0;
+      transition: width 0.2s linear;
+    }
+  }
+
+  .tracks-wrapper {
+    margin-top: .5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1em;
     width: 100%;
 
-    img {
-      width: 100%;
-      height: 100%;
+    app-sound-player {
+      width: 80%;
     }
   }
-}
-
-.song-name {
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-button {
-  margin-bottom: 8px;
-}
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #ccc;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.progress {
-  height: 100%;
-  background: #3f51b5;
-  width: 0;
-  transition: width 0.2s linear;
 }

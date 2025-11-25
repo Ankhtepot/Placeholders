@@ -27,7 +27,7 @@ export class HomeComponent {
     },
     {
       title: 'Kobe Tai',
-      trackUrl: 'https://sleepingdeficit.bandcamp.com/track/kobe-tai',
+      trackUrl: 'mp3/path/06-coldplay-x_and_y-bolo.mp3',
       artist: Artist,
       duration: 119
     }

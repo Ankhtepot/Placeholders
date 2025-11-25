@@ -5,6 +5,10 @@
     border: none;
     background-color: transparent;
 
+    :disabled {
+      cursor: none;
+    }
+
     &.useBorder {
       border: 2px solid white;
       border-radius: 5%;
