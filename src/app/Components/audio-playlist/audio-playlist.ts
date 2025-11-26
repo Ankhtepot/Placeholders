@@ -1,16 +1,17 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
-  ViewChild,
-  signal,
-  Input,
-  WritableSignal,
+  Input, OnDestroy,
   OnInit,
+  QueryList,
+  signal,
+  ViewChild,
   ViewChildren,
-  QueryList, AfterViewInit
+  WritableSignal
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
-// import {IconButtonComponent} from '../icon-button/icon-button.component';
+import {IconButtonComponent} from '../icon-button/icon-button.component';
 import {ETrackEventType, NULL_TRACK, Playlist, Track, TrackEventData} from './models';
 import {SoundPlayer} from './sound-player/sound-player';
 
@@ -19,25 +20,28 @@ import {SoundPlayer} from './sound-player/sound-player';
   standalone: true,
   templateUrl: './audio-playlist.html',
   styleUrls: ['./audio-playlist.scss'],
-  // imports: [CommonModule, IconButtonComponent, SoundPlayer]
-  imports: [CommonModule, SoundPlayer]
+  imports: [CommonModule, IconButtonComponent, SoundPlayer]
+  // imports: [CommonModule, SoundPlayer]
 })
-export class AudioPlaylist implements OnInit, AfterViewInit {
+export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
   @Input() playlist!: Playlist;
   @ViewChildren('soundPlayer') soundPlayers: QueryList<SoundPlayer>;
 
   currentTrack: WritableSignal<Track> = signal(NULL_TRACK);
   currentTrackIndex: WritableSignal<number> = signal(0);
+  currentTrackPlayer: WritableSignal<SoundPlayer | null> = signal(null);
   isPlaying = signal(false);
   hasTracks = signal(false);
   progress = signal(0);
 
   readonly maximumPlayRetries: number = 5;
+  playFirstIconWrapper!: HTMLDivElement;
 
   private audio!: HTMLAudioElement;
   private previousTrack: WritableSignal<Track> = this.currentTrack;
   private shouldUpdateProgress: boolean = false;
+  private playRetryTimeoutId: number | null = null;
 
   constructor() {
     this.soundPlayers = new QueryList<SoundPlayer>();
@@ -47,23 +51,31 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
     if (this.playlist.tracks.length > 0) {
       this.hasTracks.set(true);
       this.currentTrack.set(this.playlist.tracks[0]);
+      this.currentTrackIndex.set(0);
     }
   }
 
   ngAfterViewInit() {
     this.audio = this.audioRef.nativeElement;
+    this.playFirstIconWrapper = document.querySelector('.button-icon-wrapper')!;
+  }
+
+  ngOnDestroy() {
+    if (this.playRetryTimeoutId) {
+      clearTimeout(this.playRetryTimeoutId);
+    }
   }
 
   togglePlay() {
     if (!this.isPlaying()) {
       this.audio.play();
       this.isPlaying.set(true);
-      this.getCurrentTrackPlayer().play(false);
+      this.currentTrackPlayer()!.play(false);
       this.shouldUpdateProgress = true;
     } else {
       this.audio.pause();
       this.isPlaying.set(false);
-      this.getCurrentTrackPlayer().pause(false);
+      this.currentTrackPlayer()!.pause(false);
       this.shouldUpdateProgress = false;
     }
   }
@@ -73,7 +85,7 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
 
     let progress: number = (this.audio.currentTime / this.audio.duration) * 100;
     this.progress.set(progress);
-    this.getCurrentTrackPlayer().updateProgress(progress);
+    this.currentTrackPlayer()!.updateProgress(progress);
   }
 
   onEnded() {
@@ -82,17 +94,42 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
     this.shouldUpdateProgress = false;
     this.isPlaying.set(false);
     this.progress.set(0);
-    this.getCurrentTrackPlayer().stop(false);
+    this.currentTrackPlayer()!.stop(false);
   }
 
   onPlay() {
     this.isPlaying.set(true);
-    this.getCurrentTrackPlayer().play(false);
+    if(!this.currentTrackPlayer()) {this.setCurrentTrackPlayer()}
+    this.currentTrackPlayer()!.play(false);
+    this.shouldUpdateProgress = true;
   }
 
   onPause() {
     this.isPlaying.set(false);
-    this.getCurrentTrackPlayer().pause(false);
+    this.currentTrackPlayer()!.pause(false);
+    this.shouldUpdateProgress = false;
+  }
+
+  playFirst() {
+    this.onTrackEvent({event: ETrackEventType.play, index: 0})
+  }
+
+  playLast() {
+    this.onTrackEvent({event: ETrackEventType.play, index: this.playlist.tracks.length - 1})
+  }
+
+  playPrevious() {
+    let currentTrackIndex = this.currentTrackIndex();
+    if (currentTrackIndex <= 0) { return;}
+
+    this.onTrackEvent({event: ETrackEventType.play, index: currentTrackIndex - 1})
+  }
+
+  playNext() {
+    let currentTrackIndex = this.currentTrackIndex();
+    if (currentTrackIndex >= this.playlist.tracks.length -1) { return;}
+
+    this.onTrackEvent({event: ETrackEventType.play, index: currentTrackIndex + 1})
   }
 
   protected readonly NULL_TRACK = NULL_TRACK;
@@ -100,19 +137,22 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
   onTrackEvent($event: TrackEventData) {
     switch ($event.event) {
       case ETrackEventType.play : {
+        this.audio.pause();
         this.stopAll();
-        this.getCurrentTrackPlayer().stop(false);
+        if (!this.currentTrackPlayer()) {this.setCurrentTrackPlayer()}
+        this.currentTrackPlayer()!.stop(false);
         this.currentTrack.set(this.playlist.tracks[$event.index]);
         this.previousTrack.set(this.currentTrack());
         this.currentTrackIndex.set($event.index);
+        this.setCurrentTrackPlayer();
         this.isPlaying.set(true);
-        this.getCurrentTrackPlayer().play(false);
+        this.currentTrackPlayer()!.play(false);
         this.progress.set(0);
         this.audio.load();
         this.handlePlay();
       } break;
       case ETrackEventType.pause : {
-        this.getCurrentTrackPlayer().pause(false);
+        this.currentTrackPlayer()!.pause(false);
         this.isPlaying.set(false);
         this.audio.pause();
       }
@@ -125,8 +165,8 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
     }
   }
 
-  private getCurrentTrackPlayer(): SoundPlayer {
-    return this.soundPlayers.get(this.currentTrackIndex())!;
+  private setCurrentTrackPlayer() {
+    this.currentTrackPlayer.set(this.soundPlayers.get(this.currentTrackIndex())!);
   }
 
   private retryNr: number = 0;
@@ -148,7 +188,7 @@ export class AudioPlaylist implements OnInit, AfterViewInit {
           }
 
           console.log('error post audio.play(), trying replay, attempt nr.: ', this.retryNr);
-          setTimeout(() => { this.handlePlay(); }, 100);
+          this.playRetryTimeoutId = window.setTimeout(() => { this.handlePlay(); }, 100);
         })
     }
   }

@@ -23,13 +23,15 @@ export class HomeComponent {
       title: 'Intro',
       trackUrl: 'mp3/path/01-coldplay-square_one-bolo.mp3',
       artist: Artist,
-      duration: 89
+      duration: 89,
+      thumbnailUrl: 'images/path-images/3.jpg'
     },
     {
       title: 'Kobe Tai',
       trackUrl: 'mp3/path/06-coldplay-x_and_y-bolo.mp3',
       artist: Artist,
-      duration: 119
+      duration: 119,
+      thumbnailUrl: 'images/path-images/4.jpg'
     }
   ];
   readonly pathPlaylist: Playlist = {

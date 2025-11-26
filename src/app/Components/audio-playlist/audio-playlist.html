@@ -2,53 +2,93 @@
   <div class="title">{{ playlist.title }}</div>
   <div class="player">
     <div class="play_component">
-      <div class="song-name">{{ currentTrack() ? currentTrack().title : NULL_TRACK.title }}</div>
-      <audio #audio
-             (timeupdate)="updateProgress()"
-             (ended)="onEnded()"
-             [src]="currentTrack().trackUrl"
-                     controls
-                     (play)="onPlay()"
-                     (pause)="onPause()"
-      >
-<!--        @if (currentTrack()) {-->
-<!--          <source [src]="currentTrack().trackUrl" type="audio/mpeg"/>-->
-<!--        }-->
-        Your browser does not support the audio element.
-      </audio>
-      <div class="buttons">
-
-<!--        &lt;!&ndash; PLAY BUTTON &ndash;&gt;-->
-
-<!--                <app-icon-button-->
-<!--                  (click)="togglePlay()"-->
-<!--                  [showBorder]="false"-->
-<!--                  [width]="'2em'"-->
-<!--                  [height]="'2em'"-->
-<!--                  [disabled]="currentTrack().isInvalid || false"-->
-<!--                >-->
-<!--                  @if (isPlaying()) {-->
-<!--                    <img src="images/icons/pause.png" alt="pause">-->
-<!--                  } @else {-->
-<!--                    <img src="images/icons/play.png" alt="play">-->
-<!--                  }-->
-<!--                </app-icon-button>-->
-
-<!--        &lt;!&ndash; STOP BUTTON &ndash;&gt;-->
-
-<!--                <app-icon-button-->
-<!--                  (click)="onEnded()"-->
-<!--                  [showBorder]="false"-->
-<!--                  [width]="'2em'"-->
-<!--                  [height]="'2em'"-->
-<!--                  [disabled]="!isPlaying()"-->
-<!--                >-->
-<!--                  <img src="images/icons/stop.png" alt="stop">-->
-<!--                </app-icon-button>-->
+      <div class="song-name">
+        {{ currentTrack() ? currentTrack().title : NULL_TRACK.title }}
+         /
+        {{ currentTrack() ? currentTrack().artist : NULL_TRACK.title }}
       </div>
-<!--      <div class="progress-bar">-->
-<!--        <div class="progress" [style.width.%]="progress()"></div>-->
-<!--      </div>-->
+      <div class="content">
+        <div class="track-image">
+          <img [src]="currentTrack().thumbnailUrl" alt="album thumbnail">
+        </div>
+        <div class="controls">
+
+          <!-- Play first track button -->
+
+          <app-icon-button
+            (click)="playFirst()"
+            [showBorder]="false"
+            [width]="'2em'"
+            [height]="'2em'"
+            [disabled]="currentTrackIndex() === 0"
+          >
+            <div class="button-icon-wrapper">
+              <img src="images/icons/first.png" alt="pause"
+                   [style.--tint-color]="currentTrackIndex() !== 0 ? 'white' : 'grey'">
+            </div>
+          </app-icon-button>
+
+          <!--     Play previous song button     -->
+
+          <app-icon-button
+            (click)="playPrevious()"
+            [showBorder]="false"
+            [width]="'2em'"
+            [height]="'2em'"
+            [disabled]="currentTrackIndex() === 0"
+          >
+            <div class="button-icon-wrapper">
+              <img src="images/icons/previous.png" alt="pause"
+                   [style.--tint-color]="currentTrackIndex() !== 0 ? 'white' : 'grey'">
+            </div>
+          </app-icon-button>
+
+          <!--     Audio element     -->
+
+          <audio #audio
+                 (timeupdate)="updateProgress()"
+                 (ended)="onEnded()"
+                 [src]="currentTrack().trackUrl"
+                 controls
+                 (play)="onPlay()"
+                 (pause)="onPause()"
+                 [controlsList]="'nodownload nofullcreen'"
+          >
+            Your browser does not support the audio element.
+          </audio>
+
+<!--     Play next track button     -->
+
+          <app-icon-button
+            (click)="playNext()"
+            [showBorder]="false"
+            [width]="'2em'"
+            [height]="'2em'"
+            [disabled]="currentTrackIndex() >= playlist.tracks.length - 1"
+          >
+            <div class="button-icon-wrapper">
+              <img src="images/icons/next.png" alt="pause"
+                   [style.--tint-color]="currentTrackIndex() < playlist.tracks.length - 1 ? 'white' : 'grey'">
+            </div>
+          </app-icon-button>
+
+<!--     Play last track button     -->
+
+          <app-icon-button
+            (click)="playLast()"
+            [showBorder]="false"
+            [width]="'2em'"
+            [height]="'2em'"
+            [disabled]="currentTrackIndex() >= playlist.tracks.length - 1"
+          >
+            <div class="button-icon-wrapper">
+              <img src="images/icons/last.png" alt="pause"
+                   [style.--tint-color]="currentTrackIndex() < playlist.tracks.length - 1 ? 'white' : 'grey'">
+            </div>
+          </app-icon-button>
+
+        </div>
+      </div>
     </div>
 
     <div class=tracks-wrapper>
