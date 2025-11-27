@@ -1,22 +1,17 @@
 .player {
   width: 100%;
+  height: 100%;
   font-family: sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
-  background-color: #3f51b5;
+  background-color: #8d9ffd;
   border-radius: 0.5em;
+  cursor: pointer;
 
-  .buttons {
-    img {
-      width: 100%;
-      height: 100%;
-    }
-
-    button {
-      margin-bottom: 8px;
-    }
+  img {
+    height: inherit;
   }
 
   .song-name {
@@ -29,7 +24,7 @@
   .progress-bar {
     width: 50%;
     height: 10px;
-    background: #ccc;
+    background: #5e5e5e;
     border-radius: 5px;
     overflow: hidden;
   }

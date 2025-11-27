@@ -4,6 +4,7 @@ import {ModalComponent} from '../modal/modal.component';
 import {ModalContentGalleryComponent} from '../modal-content-gallery/modal-content-gallery.component';
 import {ModalContentPlaylist} from '../modal-content-playlist/modal-content-playlist';
 import {NULL_PLAYLIST, Playlist} from '../audio-playlist/models';
+import {ModalContentBuy} from '../modal-content-buy/modal-content-buy';
 
 export enum EModalContent {
   none = 'none',
@@ -14,7 +15,7 @@ export enum EModalContent {
 
 @Component({
   selector: 'app-album',
-  imports: [IconButtonComponent, ModalComponent, ModalContentGalleryComponent, ModalContentPlaylist],
+  imports: [IconButtonComponent, ModalComponent, ModalContentGalleryComponent, ModalContentPlaylist, ModalContentBuy],
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.scss'],
   standalone: true

@@ -13,24 +13,24 @@ import {
 import {CommonModule} from '@angular/common';
 import {IconButtonComponent} from '../icon-button/icon-button.component';
 import {ETrackEventType, NULL_TRACK, Playlist, Track, TrackEventData} from './models';
-import {SoundPlayer} from './sound-player/sound-player';
+import {SoundTrack} from './sound-track/sound-track';
 
 @Component({
   selector: 'app-audio-playlist',
   standalone: true,
   templateUrl: './audio-playlist.html',
   styleUrls: ['./audio-playlist.scss'],
-  imports: [CommonModule, IconButtonComponent, SoundPlayer]
+  imports: [CommonModule, IconButtonComponent, SoundTrack]
   // imports: [CommonModule, SoundPlayer]
 })
 export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
   @Input() playlist!: Playlist;
-  @ViewChildren('soundPlayer') soundPlayers: QueryList<SoundPlayer>;
+  @ViewChildren('soundPlayer') soundPlayers: QueryList<SoundTrack>;
 
   currentTrack: WritableSignal<Track> = signal(NULL_TRACK);
   currentTrackIndex: WritableSignal<number> = signal(0);
-  currentTrackPlayer: WritableSignal<SoundPlayer | null> = signal(null);
+  currentTrackPlayer: WritableSignal<SoundTrack | null> = signal(null);
   isPlaying = signal(false);
   hasTracks = signal(false);
   progress = signal(0);
@@ -44,7 +44,7 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
   private playRetryTimeoutId: number | null = null;
 
   constructor() {
-    this.soundPlayers = new QueryList<SoundPlayer>();
+    this.soundPlayers = new QueryList<SoundTrack>();
   }
 
   ngOnInit() {
@@ -63,20 +63,6 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {
     if (this.playRetryTimeoutId) {
       clearTimeout(this.playRetryTimeoutId);
-    }
-  }
-
-  togglePlay() {
-    if (!this.isPlaying()) {
-      this.audio.play();
-      this.isPlaying.set(true);
-      this.currentTrackPlayer()!.play(false);
-      this.shouldUpdateProgress = true;
-    } else {
-      this.audio.pause();
-      this.isPlaying.set(false);
-      this.currentTrackPlayer()!.pause(false);
-      this.shouldUpdateProgress = false;
     }
   }
 
@@ -138,6 +124,7 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
     switch ($event.event) {
       case ETrackEventType.play : {
         this.audio.pause();
+        this.shouldUpdateProgress = true;
         this.stopAll();
         if (!this.currentTrackPlayer()) {this.setCurrentTrackPlayer()}
         this.currentTrackPlayer()!.stop(false);
@@ -155,6 +142,7 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
         this.currentTrackPlayer()!.pause(false);
         this.isPlaying.set(false);
         this.audio.pause();
+        this.shouldUpdateProgress = false;
       }
     }
   }
@@ -193,5 +181,7 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  protected readonly stop = stop;
+  isCurrentIndexEqual(idx: number) {
+    return this.currentTrackIndex() === idx;
+  }
 }

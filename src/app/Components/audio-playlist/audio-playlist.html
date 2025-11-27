@@ -94,12 +94,13 @@
     <div class=tracks-wrapper>
       @if (hasTracks()) {
         @for (track of playlist.tracks; track track.title; let idx = $index) {
-          <app-sound-player
+          <app-sound-track
             #soundPlayer
             [track]="track"
             [index]="idx"
             (trackEvent)="onTrackEvent($event)"
-          ></app-sound-player>
+            [class.isActive]="isCurrentIndexEqual(idx)"
+          ></app-sound-track>
         }
       }
     </div>

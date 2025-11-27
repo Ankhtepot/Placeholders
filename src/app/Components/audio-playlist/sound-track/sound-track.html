@@ -1,0 +1,11 @@
+<div class="player" (click)="togglePlay()">
+  @if (isPlaying()) {
+    <img src="images/icons/pause.png" alt="pause">
+  } @else {
+    <img src="images/icons/play.png" alt="play">
+  }
+  <div class="song-name">{{ track.title }}</div>
+  <div class="progress-bar">
+    <div class="progress" [style.width.%]="progress()"></div>
+  </div>
+</div>

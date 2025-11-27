@@ -1,0 +1,102 @@
+<form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate>
+  <h2>Write to us!</h2>
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Your Name:</label>
+    <input
+      id="name"
+      name="meno"
+      [(ngModel)]="contact.name"
+      #name="ngModel"
+      required
+      minlength="3"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': name.invalid && name.touched }"
+    />
+    @if (name.errors?.['required'] && name.touched) {
+      <div class="invalid-feedback">
+        Please, enter your name.
+      </div>
+    }
+    @if (name.errors?.['minlength'] && name.touched) {
+      <div class="invalid-feedback">
+        The name is too short.
+      </div>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Your Email:</label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      [(ngModel)]="contact.email"
+      #email="ngModel"
+      required
+      email
+      class="form-control"
+      [ngClass]="{ 'is-invalid': email.invalid && email.touched }"
+    />
+    @if (email.errors?.['required'] && email.touched) {
+      <div class="invalid-feedback">
+        Email is required.
+      </div>
+    }
+    @if (email.errors?.['email'] && email.touched) {
+      <div class="invalid-feedback">
+        Email is in a wrong format.
+      </div>
+    }
+  </div>
+
+  <div class="checkbox-input__wrapper">
+    <img src="images/FlashbacksCover.png" alt="Flashback Album Cover">
+    <input
+      id="wantPath"
+      type="checkbox"
+      name="wantPath"
+      [(ngModel)]="contact.wantPathAlbum"
+      #wantPath = ngModel
+    />
+    <img src="images/icons/point_right.png" alt="Flashback Album Cover">
+    <label for="wantPath" class="form-label">I want to buy the Path album.</label>
+  </div>
+
+  <div class="checkbox-input__wrapper">
+    <img src="images/FlashbacksCover.png" alt="Flashback Album Cover">
+    <input
+      id="wantFlashback"
+      type="checkbox"
+      name="wantFlashback"
+      [(ngModel)]="contact.wantFlashbackAlbum"
+      #wantFlashback = ngModel
+    />
+    <img src="images/icons/point_right.png" alt="Flashback Album Cover">
+    <label for="wantFlashback" class="form-label">I want to buy the Flashback album.</label>
+  </div>
+
+  <div class="mb-3">
+    <label for="message" class="form-label">Leave the message here:</label>
+    <textarea
+      id="message"
+      name="message"
+      [(ngModel)]="contact.message"
+      #message="ngModel"
+      class="form-control"
+      [ngClass]="{ 'is-invalid': message.invalid && message.touched }"
+      rows="2"
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="!contactForm.valid || sending()"
+  >
+    @if (sending()) {
+      Sending message...
+    } @else {
+      Send Message
+    }
+  </button>
+</form>

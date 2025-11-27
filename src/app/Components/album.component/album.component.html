@@ -45,6 +45,9 @@
     @if (showModalContentType() === EModalContent.playlist && playList?.tracks && playList!.tracks.length > 0) {
       <app-modal-content-playlist [playlist]="playList || NULL_PLAYLIST" [title]="'Flashback'" />
     }
+    @if (showModalContentType() === EModalContent.buy) {
+      <app-modal-content-buy/>
+    }
   </app-modal>
 }
 

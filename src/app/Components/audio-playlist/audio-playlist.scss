@@ -1,9 +1,10 @@
+$deep-blue: #061365FF;
+
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .title {
@@ -26,7 +27,7 @@
 
   .play_component {
     width: 100%;
-    background-color: #061365FF;
+    background-color: $deep-blue;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -94,16 +95,26 @@
   }
 
   .tracks-wrapper {
-    margin-top: .5em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .1em;
     width: 100%;
 
-    app-sound-player {
-      width: 80%;
+    app-sound-track {
+      width: 100%;
+      transition: 0.3s all;
+      border-radius: .7em;
+      border: 2px solid #8d9ffd;
+      height: 2em;
+
+      &:hover {
+        border: 2px solid black;
+      }
+
+      &.isActive {
+        border: 2px solid $deep-blue;
+      }
     }
   }
 }

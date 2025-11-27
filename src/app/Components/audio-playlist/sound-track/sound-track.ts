@@ -1,17 +1,14 @@
 import {Component, EventEmitter, Input, Output, signal,} from '@angular/core';
-import {IconButtonComponent} from '../../icon-button/icon-button.component';
+// import {IconButtonComponent} from '../../icon-button/icon-button.component';
 import {ETrackEventType, Track, TrackEventData} from '../models';
 
 @Component({
-  selector: 'app-sound-player',
+  selector: 'app-sound-track',
   standalone: true,
-  templateUrl: './sound-player.html',
-  styleUrls: ['./sound-player.scss'],
-  imports: [
-    IconButtonComponent
-  ]
+  templateUrl: './sound-track.html',
+  styleUrls: ['./sound-track.scss'],
 })
-export class SoundPlayer {
+export class SoundTrack {
   @Input() track!: Track;
   @Input() index!: number;
   @Output() trackEvent: EventEmitter<TrackEventData> = new EventEmitter(false);
