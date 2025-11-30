@@ -18,8 +18,8 @@ export class ModalContentBuy {
     name: '',
     email: '',
     message: '',
-    wantPathAlbum: false,
-    wantFlashbackAlbum: false,
+    wantDownsAlbum: false,
+    wantHopeAlbum: false,
   };
 
   onSubmit(form: NgForm) {

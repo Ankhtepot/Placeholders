@@ -3,7 +3,7 @@ import {NgOptimizedImage} from '@angular/common';
 import {AlbumComponent, EModalContent} from '../../Components/album.component/album.component';
 import {Playlist, Track} from '../../Components/audio-playlist/models';
 
-const Artist: string = "Sleeping Deficit";
+const Artist: string = "Placeholders";
 
 @Component({
   selector: 'app-home',
@@ -15,29 +15,59 @@ const Artist: string = "Sleeping Deficit";
 export class HomeComponent {
 
   pathImages = [
-    "images/path-images/2.jpg", "images/path-images/3.jpg", "images/path-images/4.jpg", "images/path-images/5.jpg",
-    "images/path-images/6.jpg", "images/path-images/8.jpg", "images/path-images/9.jpg", "images/path-images/10.jpg"
+    "images/path-images/song1.webp", "images/path-images/song2.webp", "images/path-images/song3.webp", "images/path-images/song4.webp",
+    "images/path-images/song5.webp", "images/path-images/song6.webp", "images/path-images/song7.webp"
   ];
   pathTracks: Track[] = [
     {
-      title: 'Intro',
-      trackUrl: 'mp3/path/01-coldplay-square_one-bolo.mp3',
+      title: 'Muladhara',
+      trackUrl: 'mp3/Hope/mixkit-cant-get-you-off-my-mind-1210.mp3',
       artist: Artist,
-      duration: 89,
-      thumbnailUrl: 'images/path-images/3.jpg'
+      thumbnailUrl: 'images/path-images/song1.webp'
     },
     {
-      title: 'Kobe Tai',
-      trackUrl: 'mp3/path/06-coldplay-x_and_y-bolo.mp3',
+      title: 'Swaristana',
+      trackUrl: 'mp3/Hope/mixkit-dirty-thinkin-989.mp3',
       artist: Artist,
-      duration: 119,
-      thumbnailUrl: 'images/path-images/4.jpg'
+      thumbnailUrl: 'images/path-images/song2.webp'
+    },
+    {
+      title: 'Manipura',
+      trackUrl: 'mp3/Hope/mixkit-driving-ambition-32.mp3',
+      artist: Artist,
+      thumbnailUrl: 'images/path-images/song3.webp'
+    },
+    {
+      title: 'Anahata',
+      trackUrl: 'mp3/Hope/mixkit-epical-drums-01-676.mp3',
+      artist: Artist,
+      thumbnailUrl: 'images/path-images/song4.webp'
+    },
+    {
+      title: 'Vishuddha',
+      trackUrl: 'mp3/Hope/mixkit-fright-night-871.mp3',
+      artist: Artist,
+      thumbnailUrl: 'images/path-images/song5.webp'
+    },
+    {
+      title: 'Ajna',
+      trackUrl: 'mp3/Hope/mixkit-games-worldbeat-466.mp3',
+      artist: Artist,
+      thumbnailUrl: 'images/path-images/song6.webp'
+    },
+    {
+      title: 'Sahasrara',
+      trackUrl: 'mp3/Hope/mixkit-sports-highlights-51.mp3',
+      artist: Artist,
+      thumbnailUrl: 'images/path-images/song7.webp'
     }
   ];
   readonly pathPlaylist: Playlist = {
-    thumbnailUrl: 'images/path-images/2.jpg',
-    title: 'Path',
-    tracks: this.pathTracks
+    thumbnailUrl: 'images/Hope.jpg',
+    title: 'Hope',
+    tracks: this.pathTracks,
+    artist: "Placeholders"
+
   }
   protected readonly EModalContent = EModalContent;
 }

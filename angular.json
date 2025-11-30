@@ -33,6 +33,8 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/SleepingDeficitNg/",
+              "deployUrl": "/SleepingDeficitNg/",
               "budgets": [
                 {
                   "type": "initial",
@@ -86,7 +88,9 @@
             ]
           }
         },
-        "builder": "angular-cli-ghpages:deploy"
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
+        }
       }
     }
   }
