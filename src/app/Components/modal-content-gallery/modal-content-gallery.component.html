@@ -1,18 +1,20 @@
-<p>{{ galleryName }}</p>
-<!--<gallery-->
-<!--  [items]="imageItems()"-->
-<!--  bullets bulletSize="20"-->
-<!--  counter counterPosition="top"-->
-<!--  autoplay autoplayInterval="5000"-->
-<!--  thumbs-->
-<!--/>-->
-<div class="container" gallerize>
-  @for (image of imageItems(); track image) {
-    <img
-      width="200px"
-      height="200px"
-      src="{{image.data.src}}"
-      alt="{{image.data.alt}}"
-    >
-  }
+<div class="wrapper">
+    <div class="title">{{ galleryName }}</div>
+  <!--<gallery-->
+  <!--  [items]="imageItems()"-->
+  <!--  bullets bulletSize="20"-->
+  <!--  counter counterPosition="top"-->
+  <!--  autoplay autoplayInterval="5000"-->
+  <!--  thumbs-->
+  <!--/>-->
+  <div class="gallery-container" gallerize>
+    @for (image of imageItems(); track image) {
+      <img
+        width="200px"
+        height="200px"
+        src="{{image.data.src}}"
+        alt="{{image.data.alt}}"
+      >
+    }
+  </div>
 </div>

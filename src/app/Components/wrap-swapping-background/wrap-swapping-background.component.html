@@ -1,0 +1,14 @@
+<div class="background-container" #wrapper>
+  <div class="background" #primary_image [ngStyle]="{'animation-duration': transitionTime + 'ms'}"></div>
+  <div class="background" #secondary_image [ngStyle]="{'animation-duration': transitionTime + 'ms'}"></div>
+  <div
+    class="background, background-with-overlay"
+    [ngStyle]="{
+    '--overlay-color': overlayColor,
+    '--overlay-opacity': overlayOpacity,
+    }"
+  ></div>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

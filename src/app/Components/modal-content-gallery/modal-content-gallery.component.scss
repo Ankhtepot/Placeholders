@@ -1,6 +1,22 @@
-p {
-  font-size: 2em !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
-  text-align: center !important;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .title {
+    width: 80%;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    border-top: 0.2em solid black;
+    border-bottom: 0.2em solid black;
+    margin-bottom: .3em;
+  }
+
+  .gallery-container {
+    width: 80%;
+  }
 }
+

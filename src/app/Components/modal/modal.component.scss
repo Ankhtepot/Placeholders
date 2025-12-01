@@ -18,7 +18,12 @@
 
 .modal-box {
   //background: $glass-white;
-  background: rgba(230, 230, 230,0.95);
+  //background: rgba(230, 230, 230,0.5);
+  background-image: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 1) 20%,
+      rgba(0, 0, 0, 0) 90%
+  );
   padding: 2em;
   padding-top: 5em;
   border-radius: 0.5em;
