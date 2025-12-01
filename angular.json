@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sleeping-deficit": {
+    "placeholders": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "outputPath": "dist/sleeping-deficit",
+            "outputPath": "dist/placeholders",
             "assets": [
               {
                 "glob": "**/*",
@@ -33,8 +33,8 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/SleepingDeficitNg/",
-              "deployUrl": "/SleepingDeficitNg/",
+              "baseHref": "/Placeholders/",
+              "deployUrl": "/Placeholders/",
               "budgets": [
                 {
                   "type": "initial",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "sleeping-deficit:build:production"
+              "buildTarget": "placeholders:build:production"
             },
             "development": {
-              "buildTarget": "sleeping-deficit:build:development"
+              "buildTarget": "placeholders:build:development"
             }
           },
           "defaultConfiguration": "development"

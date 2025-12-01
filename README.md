@@ -1,4 +1,7 @@
-# SleepingDeficit
+# Placeholders
+
+This is an Angular project that demonstrates rather basic page for non-existent metal band Placeholders. 
+This project began as a job from a client which was later scratched, but I decided to keep working on it and use it as a part of my portfolio.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
 
@@ -26,5 +29,5 @@ This will compile your project and store the build artifacts in the `dist/` dire
 ## deploy on GitHub Pages
 
 ```bash
-ng deploy sleeping-deficit
+ng deploy placeholders
 ```
