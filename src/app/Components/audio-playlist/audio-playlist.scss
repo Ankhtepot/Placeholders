@@ -119,3 +119,27 @@ $deep-blue: #061365FF;
     }
   }
 }
+
+@media (max-width: 700px) {
+  .title {
+    width: 100%;
+  }
+
+  .player {
+    width: 100%;
+
+  .play_component{
+    .content {
+      .track-image {
+        display: none;
+      }
+
+      .controls {
+        width: 100%;
+        margin-left: 0;
+        gap: 0.05em;
+      }
+    }
+  }
+  }
+}

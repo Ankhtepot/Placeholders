@@ -130,3 +130,19 @@ a img {
 .hidden {
   display: none;
 }
+
+@media (max-width: 400px) {
+  .main_container_wrapper {
+    flex-direction: column;
+
+    .logo {
+      position: static;
+      margin-bottom: -1em;
+    }
+  }
+
+  app-album {
+    width: 95%;
+    height: 95%;
+  }
+}
