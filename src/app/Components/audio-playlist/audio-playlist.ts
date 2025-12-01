@@ -33,7 +33,6 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
   currentTrackPlayer: WritableSignal<SoundTrack | null> = signal(null);
   isPlaying = signal(false);
   hasTracks = signal(false);
-  progress = signal(0);
 
   readonly maximumPlayRetries: number = 5;
   playFirstIconWrapper!: HTMLDivElement;
@@ -70,7 +69,6 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
     if (!this.shouldUpdateProgress) return;
 
     let progress: number = (this.audio.currentTime / this.audio.duration) * 100;
-    this.progress.set(progress);
     this.currentTrackPlayer()!.updateProgress(progress);
   }
 
@@ -79,7 +77,6 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
     this.audio.currentTime = 0;
     this.shouldUpdateProgress = false;
     this.isPlaying.set(false);
-    this.progress.set(0);
     this.currentTrackPlayer()!.stop(false);
   }
 
@@ -134,7 +131,6 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
         this.setCurrentTrackPlayer();
         this.isPlaying.set(true);
         this.currentTrackPlayer()!.play(false);
-        this.progress.set(0);
         this.audio.load();
         this.handlePlay();
       } break;
@@ -142,6 +138,13 @@ export class AudioPlaylist implements OnInit, OnDestroy, AfterViewInit {
         this.currentTrackPlayer()!.pause(false);
         this.isPlaying.set(false);
         this.audio.pause();
+        this.shouldUpdateProgress = false;
+      } break;
+      case ETrackEventType.stop : {
+        this.currentTrackPlayer()!.stop(false);
+        this.isPlaying.set(false);
+        this.audio.pause();
+        this.audio.currentTime = 0;
         this.shouldUpdateProgress = false;
       }
     }

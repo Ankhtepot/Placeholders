@@ -1,9 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, signal, WritableSignal} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
-import {AlbumComponent, EModalContent} from '../../Components/album.component/album.component';
-import {Playlist, Track} from '../../Components/audio-playlist/models';
-
-const Artist: string = "Placeholders";
+import {AlbumComponent} from '../../Components/album.component/album.component';
+import Data from '../../shared/data';
 
 @Component({
   selector: 'app-home',
@@ -14,60 +12,11 @@ const Artist: string = "Placeholders";
 })
 export class HomeComponent {
 
-  pathImages = [
-    "images/path-images/song1.webp", "images/path-images/song2.webp", "images/path-images/song3.webp", "images/path-images/song4.webp",
-    "images/path-images/song5.webp", "images/path-images/song6.webp", "images/path-images/song7.webp"
-  ];
-  pathTracks: Track[] = [
-    {
-      title: 'Muladhara',
-      trackUrl: 'mp3/Hope/mixkit-cant-get-you-off-my-mind-1210.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song1.webp'
-    },
-    {
-      title: 'Swaristana',
-      trackUrl: 'mp3/Hope/mixkit-dirty-thinkin-989.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song2.webp'
-    },
-    {
-      title: 'Manipura',
-      trackUrl: 'mp3/Hope/mixkit-driving-ambition-32.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song3.webp'
-    },
-    {
-      title: 'Anahata',
-      trackUrl: 'mp3/Hope/mixkit-epical-drums-01-676.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song4.webp'
-    },
-    {
-      title: 'Vishuddha',
-      trackUrl: 'mp3/Hope/mixkit-fright-night-871.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song5.webp'
-    },
-    {
-      title: 'Ajna',
-      trackUrl: 'mp3/Hope/mixkit-games-worldbeat-466.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song6.webp'
-    },
-    {
-      title: 'Sahasrara',
-      trackUrl: 'mp3/Hope/mixkit-sports-highlights-51.mp3',
-      artist: Artist,
-      thumbnailUrl: 'images/path-images/song7.webp'
-    }
-  ];
-  readonly pathPlaylist: Playlist = {
-    thumbnailUrl: 'images/Hope.jpg',
-    title: 'Hope',
-    tracks: this.pathTracks,
-    artist: "Placeholders"
+  tooltipContent: WritableSignal<string> = signal<string>('');
 
+  setTooltip(text: string) {
+    this.tooltipContent.set(text);
   }
-  protected readonly EModalContent = EModalContent;
+
+  protected readonly Data = Data;
 }

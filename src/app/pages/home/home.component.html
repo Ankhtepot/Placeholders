@@ -4,30 +4,44 @@
     <div class="logo">
       <img alt="Sleeping Deficit" ngSrc="images/band_logo.png" height="200" width="200" priority/>
     </div>
-    <app-album name="Flashback" imagePath="images/Downs.jpg" comment="New Album:" [images]="pathImages" [playList]="pathPlaylist"/>
+    <app-album name="Flashback" imagePath="images/Downs.jpg" comment="New Album:" [images]="Data.hopeImages" [playList]="Data.hopePlaylist"/>
     <app-album name="Flashback" imagePath="images/Hope.jpg" comment="First Album:"/>
   </div>
 
   <div id="menu">
-    <a href="#" class="menu_item" title="Facebook.com">
+    <a href="#" class="menu_item" title="Facebook.com"
+       (mouseenter)="setTooltip('Facebook')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu1-fb.png" alt="Facebook.com">
     </a>
     <a href="#" class="menu_item" id="menuSpotify"
-       title="Spotify.com">
+       title="Spotify.com" (mouseenter)="setTooltip('Spotify')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu-sf.png" alt="Spotify.com">
     </a>
-    <a href="#" class="menu_item" id="menu2" title="BandCamp.com">
+    <a href="#" class="menu_item" id="menu2" title="BandCamp.com"
+       (mouseenter)="setTooltip('Band Camp')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu2-bc.png" alt="BandCamp.com">
     </a>
-    <a href="#" class="menu_item" id="menu3"
-       title="YouTube.com">
+    <a href="#" class="menu_item" id="menu3" title="YouTube.com"
+       (mouseenter)="setTooltip('Youtube')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu3-yt.png" alt="Youtube.com">
     </a>
-    <a href="#" class="menu_item" title="Bandzone.cz">
+    <a href="#" class="menu_item" title="Bandzone.cz"
+       (mouseenter)="setTooltip('Bandzone')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu4-bz.png" alt="Bandzone.cz">
     </a>
-    <a href="#" class="menu_item" id="menu5" title="SoundCloud.com">
+    <a href="#" class="menu_item" id="menu5" title="SoundCloud.com"
+       (mouseenter)="setTooltip('Sound Cloud')" (mouseleave)="setTooltip('')"
+    >
       <img src="images/menu5-sc.png" alt="SoundCloud.com">
     </a>
+  </div>
+
+  <div class="tooltip" [class.tooltipVisible]="tooltipContent() !== ''">
+    <div class="tooltip_text">{{ tooltipContent() }}</div>
   </div>
 </div>

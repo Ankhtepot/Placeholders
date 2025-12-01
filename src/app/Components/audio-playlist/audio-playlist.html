@@ -23,8 +23,8 @@
             [disabled]="currentTrackIndex() === 0"
           >
             <div class="button-icon-wrapper">
-              <img src="images/icons/first.png" alt="pause"
-                   [style.--tint-color]="currentTrackIndex() !== 0 ? 'white' : 'grey'">
+              <img src="images/icons/first.png" alt="play first track"
+                   [style.--tint-color]="currentTrackIndex() > 0 ? 'white' : 'grey'">
             </div>
           </app-icon-button>
 
@@ -38,8 +38,8 @@
             [disabled]="currentTrackIndex() === 0"
           >
             <div class="button-icon-wrapper">
-              <img src="images/icons/previous.png" alt="pause"
-                   [style.--tint-color]="currentTrackIndex() !== 0 ? 'white' : 'grey'">
+              <img src="images/icons/previous.png" alt="play previous track"
+                   [style.--tint-color]="currentTrackIndex() > 0 ? 'white' : 'grey'">
             </div>
           </app-icon-button>
 
@@ -67,7 +67,7 @@
             [disabled]="currentTrackIndex() >= playlist.tracks.length - 1"
           >
             <div class="button-icon-wrapper">
-              <img src="images/icons/next.png" alt="pause"
+              <img src="images/icons/next.png" alt="Play next track"
                    [style.--tint-color]="currentTrackIndex() < playlist.tracks.length - 1 ? 'white' : 'grey'">
             </div>
           </app-icon-button>
@@ -82,7 +82,7 @@
             [disabled]="currentTrackIndex() >= playlist.tracks.length - 1"
           >
             <div class="button-icon-wrapper">
-              <img src="images/icons/last.png" alt="pause"
+              <img src="images/icons/last.png" alt="Play last track"
                    [style.--tint-color]="currentTrackIndex() < playlist.tracks.length - 1 ? 'white' : 'grey'">
             </div>
           </app-icon-button>

@@ -1,3 +1,11 @@
+/* Colors */
+$deep-blue: #061365FF;
+
+
+:root {
+  --deep-blue: #{$deep-blue};
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

@@ -1,9 +1,12 @@
 <div class="player" (click)="togglePlay()">
-  @if (isPlaying()) {
-    <img src="images/icons/pause.png" alt="pause">
-  } @else {
-    <img src="images/icons/play.png" alt="play">
-  }
+  <div class="button-icon_wrapper">
+    @if (isPlaying()) {
+      <img src="images/icons/stop.png" alt="pause" [style.--tint-color]="'var(--deep-blue)'">
+<!--      <img src="images/icons/stop.png" alt="pause" [style.&#45;&#45;tint-color]="'red'">-->
+    } @else {
+      <img src="images/icons/play.png" alt="stop" [style.--tint-color]="'white'">
+    }
+  </div>
   <div class="song-name">{{ track.title }}</div>
   <div class="progress-bar">
     <div class="progress" [style.width.%]="progress()"></div>

@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output, signal,} from '@angular/core';
-// import {IconButtonComponent} from '../../icon-button/icon-button.component';
 import {ETrackEventType, Track, TrackEventData} from '../models';
 
 @Component({
@@ -7,6 +6,8 @@ import {ETrackEventType, Track, TrackEventData} from '../models';
   standalone: true,
   templateUrl: './sound-track.html',
   styleUrls: ['./sound-track.scss'],
+  imports: [
+  ]
 })
 export class SoundTrack {
   @Input() track!: Track;
@@ -44,7 +45,7 @@ export class SoundTrack {
 
   togglePlay() {
     this.isPlaying()
-      ? this.emitTrackEvent(ETrackEventType.pause)
+      ? this.emitTrackEvent(ETrackEventType.stop)
       : this.emitTrackEvent(ETrackEventType.play);
   }
 
